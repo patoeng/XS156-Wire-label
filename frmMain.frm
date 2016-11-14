@@ -1,13 +1,13 @@
 VERSION 5.00
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "mscomctl.OCX"
 Begin VB.Form frmMain 
    BackColor       =   &H00C0C000&
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Packaging Software"
    ClientHeight    =   10710
    ClientLeft      =   150
-   ClientTop       =   825
+   ClientTop       =   720
    ClientWidth     =   15240
    ControlBox      =   0   'False
    FillColor       =   &H80000002&
@@ -472,7 +472,7 @@ Begin VB.Form frmMain
       Appearance      =   1
       MonthBackColor  =   8454143
       ShowWeekNumbers =   -1  'True
-      StartOfWeek     =   63242242
+      StartOfWeek     =   65994754
       TrailingForeColor=   8421504
       CurrentDate     =   38856
    End

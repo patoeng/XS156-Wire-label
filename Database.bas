@@ -253,7 +253,7 @@ End Sub
 Public Function SetingParameter() As Boolean
 On Error GoTo Salah
     If GetSetting(App.Title, "Settings", "Server") = "" Then
-        ServerAlamat = "10.184.65.211"
+        'ServerAlamat = "10.184.65.211"
         SaveSetting App.Title, "Settings", "Server", ServerAlamat
     Else
         ServerAlamat = GetSetting(App.Title, "Settings", "Server")
