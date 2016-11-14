@@ -1,0 +1,11 @@
+Select xs.label.* from xs.label left join xs.family on xs.label.group = xs.family.nama where xs.family.mesin3='1' order by xs.label.ref asc;
+
+"SELECT `Model` FROM `XS`.`Label` LEFT JOIN `XS`.`family` on `XS`.`label`.`group` = `XS`.`family`.`nama` WHERE `XS`.`family`.`mesin3`='3' and `XS`.`label`.`aktif`='1' ORDER BY `XS`.`label`.`ref` ASC"
+
+"SELECT `Group` FROM `XS`.`Label` WHERE `ref`='XS108B3PAL2' ORDER BY `"
+
+"SELECT `Group` FROM `XS`.`Label` WHERE `ref`='XS108B3PAL2' ORDER BY `group` asc"
+
+"SELECT * FROM `XS`.`Label` WHERE `Model`='XS108B3PAL2' ORDER BY `Nama` ASC"
+
+SQL = "SELECT `" & Kolom & "` FROM `" & database & "`.`" & tabel & "` WHERE `" & Kriteria & " ORDER BY `" & urut

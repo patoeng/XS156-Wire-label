@@ -1,0 +1,39 @@
+ProsesSts(0)	= Total
+ProsesSts(1)	= Setting Software
+ProsesSts(2)	= Koneksi Database
+ProsesSts(3)	= Start CodeSoft
+
+
+Frame1	= Label Information
+Frame2	= Message
+Frame3	= Properties
+Frame4	= Line
+Frame5 	= Family
+Frame6	= Reference
+Frame7	= Label Type
+Frame8	= Posisi Label
+
+Check3		Scanner Check
+opttype		Type label 	'perlu ditambah
+optposisi	Posisi label
+
+Tipe Label
+Individual
+Packing Group
+Product
+DateCode
+PFC
+Special
+
+CREATE TABLE `family` (
+  
+`Nama` varchar(45) NOT NULL,
+  
+`Keterangan` varchar(45) default NULL,
+  
+`Aktif` tinyint(1) NOT NULL default '0',
+  
+PRIMARY KEY  (`Nama`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Family Name'
+
+

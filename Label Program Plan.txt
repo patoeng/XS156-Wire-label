@@ -1,0 +1,22 @@
+Label Printing Program
+
+Scope
+1. Label Printing Program is an application to print label of the product.
+2. It run on Windows Computer.
+3. 
+
+Requirements
+1. The Application have connection to MySQL database
+2. The application only accept integer vJumlah as value to print quantity of the Label
+3. The application accept double vKiri and vKanan to adjust the printing position
+4. The application will have list of the Family able to print
+5. The application will have list the model able to print
+6. This Application must be able to be implemented as :
+	A window application, as an executable file
+	a reusable component in Windows
+7. This application able to configure the connection string.
+
+Design
+1. Design the data
+2. Draw user interface
+3. Diagram the connection between the business layer and the data layer.
