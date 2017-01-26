@@ -7,7 +7,7 @@ Begin VB.Form frmMain
    Caption         =   "Packaging Software"
    ClientHeight    =   10710
    ClientLeft      =   150
-   ClientTop       =   720
+   ClientTop       =   840
    ClientWidth     =   15240
    ControlBox      =   0   'False
    FillColor       =   &H80000002&
@@ -21,6 +21,113 @@ Begin VB.Form frmMain
    ScaleWidth      =   15240
    StartUpPosition =   3  'Windows Default
    Visible         =   0   'False
+   Begin VB.CommandButton cmd_Start 
+      Caption         =   "LANJUTKAN"
+      Height          =   495
+      Left            =   1680
+      TabIndex        =   81
+      Top             =   1560
+      Visible         =   0   'False
+      Width           =   1815
+   End
+   Begin MSComctlLib.Slider Slider1 
+      Height          =   135
+      Left            =   2520
+      TabIndex        =   80
+      Top             =   7080
+      Width           =   30
+      _ExtentX        =   53
+      _ExtentY        =   238
+      _Version        =   393216
+   End
+   Begin VB.Timer timerLabLoad 
+      Enabled         =   0   'False
+      Interval        =   100
+      Left            =   11760
+      Top             =   9360
+   End
+   Begin VB.Frame Frame9 
+      Caption         =   "Traceability"
+      Height          =   1095
+      Left            =   120
+      TabIndex        =   66
+      Top             =   480
+      Width           =   3375
+      Begin VB.Label lbl_OrderNumber 
+         Caption         =   "Label16"
+         Height          =   255
+         Left            =   2040
+         TabIndex        =   79
+         Top             =   720
+         Width           =   1215
+      End
+      Begin VB.Label Label15 
+         Caption         =   "Order  Number"
+         Height          =   255
+         Left            =   720
+         TabIndex        =   78
+         Top             =   720
+         Width           =   1215
+      End
+      Begin VB.Label Label14 
+         Caption         =   "Output"
+         Height          =   255
+         Left            =   720
+         TabIndex        =   75
+         Top             =   480
+         Width           =   735
+      End
+      Begin VB.Label lblTarget 
+         Caption         =   "lblTarget"
+         Height          =   255
+         Left            =   3360
+         TabIndex        =   73
+         Top             =   480
+         Visible         =   0   'False
+         Width           =   615
+      End
+      Begin VB.Label lblOutputQty 
+         Caption         =   "lblOutputQty"
+         Height          =   255
+         Left            =   2040
+         TabIndex        =   71
+         Top             =   480
+         Width           =   495
+      End
+      Begin VB.Label lblProcessableQty 
+         Caption         =   "lblProcessableQty"
+         Height          =   255
+         Left            =   2040
+         TabIndex        =   70
+         Top             =   240
+         Width           =   495
+      End
+      Begin VB.Label Label10 
+         Caption         =   "Processable Qty"
+         Height          =   255
+         Left            =   720
+         TabIndex        =   69
+         Top             =   240
+         Width           =   1215
+      End
+      Begin VB.Shape Shape1 
+         BackColor       =   &H0000C0C0&
+         FillColor       =   &H0000FF00&
+         FillStyle       =   0  'Solid
+         Height          =   255
+         Left            =   240
+         Top             =   240
+         Width           =   375
+      End
+   End
+   Begin VB.CommandButton Command1 
+      Caption         =   "Traceability Check"
+      Height          =   615
+      Left            =   13440
+      TabIndex        =   65
+      Top             =   9720
+      Width           =   1695
+   End
    Begin VB.Frame Frame8 
       BackColor       =   &H008080FF&
       Caption         =   "Posisi"
@@ -36,7 +143,7 @@ Begin VB.Form frmMain
       EndProperty
       Height          =   1455
       Left            =   8160
-      TabIndex        =   56
+      TabIndex        =   55
       Top             =   2040
       Width           =   3615
       Begin VB.TextBox TxtKiri 
@@ -44,7 +151,7 @@ Begin VB.Form frmMain
          Height          =   375
          Left            =   2400
          MaxLength       =   5
-         TabIndex        =   60
+         TabIndex        =   59
          Text            =   "Text4"
          ToolTipText     =   "Buat Geser Kiri Kanan"
          Top             =   960
@@ -55,7 +162,7 @@ Begin VB.Form frmMain
          Height          =   375
          Left            =   2400
          MaxLength       =   5
-         TabIndex        =   59
+         TabIndex        =   58
          Text            =   "Text3"
          ToolTipText     =   "Buat Geser Atas Bawah"
          Top             =   600
@@ -77,7 +184,7 @@ Begin VB.Form frmMain
          Index           =   2
          Left            =   120
          Style           =   1  'Graphical
-         TabIndex        =   58
+         TabIndex        =   57
          ToolTipText     =   "Posisi Keluar Terbalik"
          Top             =   960
          Width           =   1575
@@ -98,7 +205,7 @@ Begin VB.Form frmMain
          Index           =   1
          Left            =   120
          Style           =   1  'Graphical
-         TabIndex        =   57
+         TabIndex        =   56
          ToolTipText     =   "Posisi keluar Normal"
          Top             =   600
          Value           =   -1  'True
@@ -118,7 +225,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   255
          Left            =   1800
-         TabIndex        =   62
+         TabIndex        =   61
          Top             =   960
          Width           =   495
       End
@@ -136,7 +243,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   255
          Left            =   1800
-         TabIndex        =   61
+         TabIndex        =   60
          Top             =   600
          Width           =   495
       End
@@ -146,7 +253,7 @@ Begin VB.Form frmMain
       Left            =   10800
       ScaleHeight     =   2835
       ScaleWidth      =   3915
-      TabIndex        =   55
+      TabIndex        =   54
       Top             =   6120
       Visible         =   0   'False
       Width           =   3975
@@ -166,7 +273,7 @@ Begin VB.Form frmMain
       EndProperty
       Height          =   2535
       Left            =   12120
-      TabIndex        =   52
+      TabIndex        =   51
       Top             =   960
       Width           =   3015
       Begin VB.OptionButton OptType 
@@ -186,7 +293,7 @@ Begin VB.Form frmMain
          Left            =   240
          MaskColor       =   &H80000000&
          Style           =   1  'Graphical
-         TabIndex        =   65
+         TabIndex        =   64
          ToolTipText     =   "Buat Label Packing Group"
          Top             =   2040
          Width           =   2655
@@ -208,7 +315,7 @@ Begin VB.Form frmMain
          Left            =   240
          MaskColor       =   &H80000000&
          Style           =   1  'Graphical
-         TabIndex        =   64
+         TabIndex        =   63
          ToolTipText     =   "Buat Label Packing Group"
          Top             =   1680
          Width           =   2655
@@ -230,7 +337,7 @@ Begin VB.Form frmMain
          Left            =   240
          MaskColor       =   &H80000000&
          Style           =   1  'Graphical
-         TabIndex        =   63
+         TabIndex        =   62
          ToolTipText     =   "Buat Label Packing Group"
          Top             =   1320
          Width           =   2655
@@ -252,7 +359,7 @@ Begin VB.Form frmMain
          Left            =   240
          MaskColor       =   &H80000000&
          Style           =   1  'Graphical
-         TabIndex        =   54
+         TabIndex        =   53
          ToolTipText     =   "Buat Label Packing Group"
          Top             =   960
          Width           =   2655
@@ -274,7 +381,7 @@ Begin VB.Form frmMain
          Left            =   240
          MaskColor       =   &H80000000&
          Style           =   1  'Graphical
-         TabIndex        =   53
+         TabIndex        =   52
          ToolTipText     =   "Buat Label Individual"
          Top             =   600
          Value           =   -1  'True
@@ -293,13 +400,15 @@ Begin VB.Form frmMain
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   1455
+      Height          =   1335
       Left            =   4080
-      TabIndex        =   50
-      Top             =   2040
+      TabIndex        =   49
+      Top             =   2160
+      Visible         =   0   'False
       Width           =   3735
       Begin VB.TextBox txtRef 
          BackColor       =   &H0080FF80&
+         Enabled         =   0   'False
          Height          =   465
          Left            =   240
          TabIndex        =   0
@@ -322,7 +431,7 @@ Begin VB.Form frmMain
          Height          =   465
          Left            =   240
          Style           =   2  'Dropdown List
-         TabIndex        =   51
+         TabIndex        =   50
          ToolTipText     =   "Pilih Modelnya"
          Top             =   720
          Width           =   3255
@@ -341,10 +450,10 @@ Begin VB.Form frmMain
          Italic          =   0   'False
          Strikethrough   =   0   'False
       EndProperty
-      Height          =   1455
+      Height          =   1335
       Left            =   120
-      TabIndex        =   48
-      Top             =   2040
+      TabIndex        =   47
+      Top             =   2160
       Width           =   3615
       Begin VB.ComboBox cboFamily 
          BackColor       =   &H0080FF80&
@@ -360,7 +469,7 @@ Begin VB.Form frmMain
          Height          =   465
          Left            =   240
          Style           =   2  'Dropdown List
-         TabIndex        =   49
+         TabIndex        =   48
          ToolTipText     =   "Pilih Familnya"
          Top             =   720
          Width           =   3135
@@ -380,7 +489,7 @@ Begin VB.Form frmMain
       EndProperty
       Height          =   1455
       Left            =   120
-      TabIndex        =   46
+      TabIndex        =   45
       Top             =   2040
       Width           =   2295
       Begin VB.ComboBox cboLine 
@@ -396,7 +505,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   465
          Left            =   240
-         TabIndex        =   47
+         TabIndex        =   46
          ToolTipText     =   "Pilih Linenya"
          Top             =   600
          Width           =   1815
@@ -411,7 +520,7 @@ Begin VB.Form frmMain
    Begin VB.TextBox Text2 
       Height          =   285
       Left            =   11640
-      TabIndex        =   45
+      TabIndex        =   44
       Top             =   1800
       Visible         =   0   'False
       Width           =   255
@@ -430,11 +539,11 @@ Begin VB.Form frmMain
          Strikethrough   =   0   'False
       EndProperty
       Height          =   495
-      Left            =   120
+      Left            =   4080
       MaskColor       =   &H80000000&
-      TabIndex        =   42
+      TabIndex        =   41
       ToolTipText     =   "Beri tanda centang bila ingin mengunakan scanner"
-      Top             =   1440
+      Top             =   1680
       Value           =   1  'Checked
       Visible         =   0   'False
       Width           =   1935
@@ -442,26 +551,17 @@ Begin VB.Form frmMain
    Begin VB.TextBox Text1 
       Height          =   285
       Left            =   12000
-      TabIndex        =   41
+      TabIndex        =   40
       Top             =   1800
       Visible         =   0   'False
       Width           =   255
    End
-   Begin VB.TextBox txtchar9 
-      Height          =   285
-      Left            =   240
-      TabIndex        =   40
-      Text            =   "Char9"
-      Top             =   7560
-      Visible         =   0   'False
-      Width           =   1335
-   End
    Begin MSComCtl2.MonthView MonthView1 
       Height          =   2370
-      Left            =   10680
+      Left            =   12120
       TabIndex        =   38
       ToolTipText     =   "Pilih Date code yang diinginkan"
-      Top             =   3720
+      Top             =   1200
       Visible         =   0   'False
       Width           =   3075
       _ExtentX        =   5424
@@ -472,7 +572,7 @@ Begin VB.Form frmMain
       Appearance      =   1
       MonthBackColor  =   8454143
       ShowWeekNumbers =   -1  'True
-      StartOfWeek     =   65994754
+      StartOfWeek     =   16449538
       TrailingForeColor=   8421504
       CurrentDate     =   38856
    End
@@ -729,10 +829,10 @@ Begin VB.Form frmMain
    Begin VB.CommandButton cmdStorePass 
       Caption         =   "Set Printer"
       Height          =   615
-      Left            =   3960
+      Left            =   0
       MaskColor       =   &H80000000&
       TabIndex        =   6
-      Top             =   9480
+      Top             =   9720
       Visible         =   0   'False
       Width           =   1215
    End
@@ -773,7 +873,7 @@ Begin VB.Form frmMain
             Strikethrough   =   0   'False
          EndProperty
          ForeColor       =   &H000080FF&
-         Height          =   1455
+         Height          =   1335
          Left            =   120
          TabIndex        =   5
          Top             =   480
@@ -814,9 +914,9 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   615
          Left            =   6480
-         TabIndex        =   44
+         TabIndex        =   43
          ToolTipText     =   "Jumlah yang akan diprint"
-         Top             =   1080
+         Top             =   960
          Visible         =   0   'False
          Width           =   1815
       End
@@ -835,7 +935,7 @@ Begin VB.Form frmMain
          EndProperty
          Height          =   885
          Left            =   360
-         TabIndex        =   43
+         TabIndex        =   42
          Top             =   960
          Width           =   5295
       End
@@ -1080,6 +1180,58 @@ Begin VB.Form frmMain
       Top             =   9240
       Width           =   3255
    End
+   Begin VB.Label Label11 
+      BackColor       =   &H00C0C000&
+      Caption         =   "Process Id:"
+      Height          =   255
+      Left            =   4200
+      TabIndex        =   77
+      Top             =   1080
+      Width           =   855
+   End
+   Begin VB.Label lbl_Id 
+      BackColor       =   &H00C0C000&
+      Caption         =   "Id"
+      Height          =   255
+      Left            =   5160
+      TabIndex        =   76
+      Top             =   1080
+      Width           =   5895
+   End
+   Begin VB.Label Label13 
+      Caption         =   "lblTarget"
+      Height          =   255
+      Left            =   0
+      TabIndex        =   74
+      Top             =   0
+      Visible         =   0   'False
+      Width           =   975
+   End
+   Begin VB.Label Label12 
+      Caption         =   "Processable Qty"
+      Height          =   255
+      Left            =   0
+      TabIndex        =   72
+      Top             =   0
+      Width           =   1215
+   End
+   Begin VB.Label Label8 
+      Caption         =   "Processable Qty"
+      Height          =   255
+      Index           =   1
+      Left            =   0
+      TabIndex        =   68
+      Top             =   0
+      Width           =   1335
+   End
+   Begin VB.Label Label9 
+      Caption         =   "Processable Qty"
+      Height          =   255
+      Left            =   0
+      TabIndex        =   67
+      Top             =   0
+      Width           =   1335
+   End
    Begin VB.Label Label1 
       Alignment       =   2  'Center
       BackColor       =   &H00C0C000&
@@ -1143,6 +1295,11 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Option Explicit
 Dim Loading As Boolean
+Dim FirstLoad As Boolean
+Public WithEvents XsClient As Xs156Client
+Attribute XsClient.VB_VarHelpID = -1
+Dim LoadLabel As Boolean
+
 
 Private Sub cboFamily_click()
 Dim Kondisi As Boolean
@@ -1197,13 +1354,22 @@ Salah:
     
 End Sub
 
+Private Sub Command1_Click()
+ Dim s As String
+ s = XsClient.ConnectionTest
+ MsgBox s
+End Sub
+
 Private Sub Form_Initialize()
 Dim I As Byte
 Dim Kondisi As Boolean
 Dim Nama As String
-
+ FirstLoad = True
 On Error GoTo Salah
+  
+    
     Loading = True
+    LoadLabel = True
     Me.Left = (Screen.Width - Me.Width) / 2
     Me.Top = (Screen.Height - Me.Height) / 2
     txtRef.Text = ""
@@ -1236,7 +1402,9 @@ On Error GoTo Salah
         SetFrame Frame4, False
 '        Frame4.Visible = False
 '        Frame5.Visible = True
-        
+        Set XsClient = New Xs156Client
+        XsClient.StartUpdater
+    
         If SatuKeluarga Then
             Label1.Caption = Keluarga & " Label Printing Station"
             SetFrame Frame5, False
@@ -1303,6 +1471,9 @@ On Error GoTo Salah
     MonthView1_DateClick Now
     Loading = False
     ModelPilih = ""
+    
+    
+    
     Exit Sub
 
 Salah:
@@ -1340,7 +1511,7 @@ Private Sub Form_Terminate()
     cmdExit_Click
 End Sub
 
-Private Sub Printing()
+Private Sub Printing(ByVal jumlah As Integer)
 Dim HasilPrint
 Dim response As String
 Dim Lokasi$, Pesan$
@@ -1350,19 +1521,30 @@ On Error GoTo ErrorHandle
         response = "Error!! No open document"
         GoTo ErrorHandle
     End If
+    XsClient.UpdateOutputQuantity (jumlah)
     
     frmMain.lblmessagebox.Caption = "Printing sedang dilakukan..."
     Lokasi$ = App.Path & "\DataLok\" & Format(Date, "yyww", vbSunday, vbFirstFullWeek) & ".log"
     Pesan = Day(Date) & "/" & Month(Date) & "/" & Year(Date) & ";" & Time & ";" & cboLine.List(cboLine.ListIndex) & ";" & cboFamily.List(cboFamily.ListIndex) & ";" & cboModel.List(cboModel.ListIndex) & ";" & TextQty.Text & ";" & Textdate.Text
     
-    Set Doc = CS7Server.ActiveDocument
+    
+    On Error GoTo DocCheckError
+    Doc.Close
+    
+DocCheckError: Err.Clear
+    
+    Set Doc = CS7Server.Documents.Open(ActiveLablePath)
+    Penyegaran
     Doc.VertPrintOffset = Val(TxtAtas.Text)
     Doc.HorzPrintOffset = Val(TxtKiri.Text)
 
     If CancelBut Then Exit Sub
-    Qty_printed = Int(TextQty.Text)
+    Qty_printed = jumlah
 '    HasilPrint = Doc.PrintLabel(Qty_printed, 1)
+
+    Doc.Printer.SwitchTo ("ZDesigner 110Xi4 600 dpi")
     HasilPrint = Doc.PrintDocument(Qty_printed)
+    
     If HasilPrint = 1 Then HasilPrint = True Else HasilPrint = False
     If Not HasilPrint Then
         response = "Problem: tak dapat nge-print."
@@ -1375,7 +1557,7 @@ On Error GoTo ErrorHandle
     frmMain.lblmessagebox.Caption = "Printing Selesai !! "
     Logdata Lokasi$, Pesan$
     Exit Sub 'necessary if not it will always go into Errorhandle routine
-
+    
 ErrorHandle:
     MsgBox response & vbCrLf & "Printing Problem", vbExclamation, "Warning"
 '       MsgBox "Missing file .Lab, .mdb file or tables or unable to find the reference", vbExclamation, "Warning"
@@ -1413,6 +1595,7 @@ On Error GoTo Salah
 '    CSVar.Value = ModelPilih
 '    Set CSVar = Doc.Variables.FormVariables("DateCode")
 '    CSVar.Value = Textdate.Text
+    
     Doc.Variables.FormVariables("Model").Value = ModelPilih
     Doc.Variables.FormVariables("DateCode").Value = Textdate.Text
     Set CSVar = Nothing
@@ -1607,16 +1790,48 @@ On Error GoTo Salah
         CancelBut = False
         'Unload Me
         frmMain.SetFocus
-        Call Printing
+        Call Printing(Int(TextQty.Text))
+    
         MonthView1_DateClick Now
+        
     End If
     If Check3.Value = 1 Then
         txtRef.SetFocus
     End If
+    
     Exit Sub
-
+    
 Salah:
-    lblmessagebox.Caption = "Problem : tombol print bermasalah"
+    lblmessagebox.Caption = "Problem : tombol print bermasalah " + Err.Description
+
+End Sub
+
+Private Sub printTrac(ByVal jumlah As Integer)
+'If Textdate <> "" Then
+On Error GoTo Salah
+    If (jumlah <= 0 Or jumlah) > 32767 Then
+        MsgBox "Jumlah label tidak valid"
+        TextQty.Text = ""
+        TextQty.SetFocus
+    Else
+        Qty_printed = jumlah
+        CancelBut = False
+        'Unload Me
+        frmMain.SetFocus
+        Call Printing(jumlah)
+    
+        MonthView1_DateClick Now
+        
+    End If
+    If Check3.Value = 1 Then
+        ''txtRef.SetFocus
+    End If
+    
+    Exit Sub
+    
+Salah:
+    lblmessagebox.Caption = "Problem : tombol print bermasalah " + Err.Description
+
 End Sub
 
 Private Sub MonthView1_DateClick(ByVal DateClicked As Date)
@@ -1807,6 +2022,13 @@ Dim Kondisi As String
     End If
 End Sub
 
+
+
+Private Sub timerLabLoad_Timer()
+    timerLabLoad.Enabled = False
+    LoadLabel = False
+End Sub
+
 Private Sub Toolbar1_ButtonClick(ByVal Buttonclicked As MSComctlLib.Button)
 Select Case Buttonclicked.Key
     Case "CSToggle"
@@ -1862,7 +2084,6 @@ Salah:
 '    MsgBox "Problem: (Pilih Model tak jalan) hubungi test enginner.", vbExclamation
 
 End Sub
-
 Private Sub txtRef_KeyPress(KeyAscii As Integer)
 Dim Kondisi As Boolean
 Dim I As Integer
@@ -1898,6 +2119,7 @@ On Error GoTo Salah
             PesanSalah = "Gagal ambil kode group"
             GoTo Salah
         End If
+        
         AmbilLabAktif ServerData, "Label", "Nama` ASC", "Ref`='" & ModelPilih & "'", Kondisi
         If Kondisi Then
 'Begin v5.0.5 ----------------------------------------------------------------------------------------------
@@ -1948,7 +2170,97 @@ Salah:
     StatusBar1.Panels.Item(2).Text = "Problem"
     Timer2.Enabled = True
     'MsgBox "Kesalahan dalam mengambil data" & vbCrLf & PesanSalah, vbExclamation, "Warning"
+End Sub
+Public Sub LoadReference(ByVal reference As String)
+Dim Kondisi As Boolean
+Dim I As Integer
+Dim KodeRef As String
+Dim KodeGroup As String
 
+On Error GoTo Salah
+    ''If KeyAscii = 13 Then\
+        LoadLabel = True
+        MonthView1_DateClick Now
+        ModelPilih = reference
+        If Len(ModelPilih) > 16 Then
+            ModelPilih = Trim(Left(ModelPilih, 15))
+        End If
+        TxtDisplayRef = ModelPilih
+'Begin v5.0.5 ----------------------------------------------------------------------------------------------
+' Oleh  : Yohanes Khan
+' Tgl   : 20130923
+' Alasan    : Problem untuk TQ product dan pembatasan pemilihan agar label hanya muncul yang diperlukan saja
+        If Right(ModelPilih, 2) = "TQ" Then
+            ModelPilih = Left(ModelPilih, Len(ModelPilih) - 2)
+        ElseIf Right(ModelPilih, 3) = "SAX" Then
+            ModelPilih = Left(ModelPilih, Len(ModelPilih) - 3)
+        End If
+'End v5.0.5 ----------------------------------------------------------------------------------------------
+        AmbilKolom "Group", ServerData, "Label", "group` asc", "ref`='" & ModelPilih & "'", Kondisi, KodeGroup
+        If Kondisi Then
+            Kondisi = Bukalab(KodeGroup)
+            If Not Kondisi Then
+                PesanSalah = "Gagal Buka template"
+                GoTo Salah
+            End If
+        Else
+            PesanSalah = "Gagal ambil kode group"
+            GoTo Salah
+        End If
+        
+        AmbilLabAktif ServerData, "Label", "Nama` ASC", "Ref`='" & ModelPilih & "'", Kondisi
+        If Kondisi Then
+'Begin v5.0.5 ----------------------------------------------------------------------------------------------
+' Oleh  : Yohanes Khan
+' Tgl   : 20130923
+' Alasan    : Problem untuk TQ product dan pembatasan pemilihan agar label hanya muncul yang diperlukan saja
+            'For I = 1 To 5
+            '    If Lab(I) <> "" Then
+            '        OptType(I).Visible = LabAktif(I)
+            '    End If
+            'Next I
+            For I = 1 To 5
+                If I = 3 Then
+                    OptType(I).Visible = True
+                Else
+                    OptType(I).Visible = False
+                End If
+            Next I
+            SetFrame Frame8, True
+            SetFrame Frame7, True
+            'OptType(3).Visible = True
+            'OptType_Click (3)
+            OptType(3).Value = True
+'End v5.0.5 ----------------------------------------------------------------------------------------------
+            'KodeRef = Left(ModelPilih, 2)
+            'If KodeRef = "XU" Then
+            '    OptType_Click (3)
+            'ElseIf KodeRef = "SA" Then
+            '    OptType_Click (4)
+            'Else
+            '    OptType_Click (1)
+            'End If
+            Kondisi = Penyegaran
+            If Not Kondisi Then
+                GoTo Salah
+            End If
+        Else
+            PesanSalah = "Gagal ambil DataLab Aktif"
+            GoTo Salah
+        End If
+        txtRef.Text = ""
+        
+        timerLabLoad.Enabled = True
+        
+    ''End If
+    Exit Sub
+Salah:
+    SetFrame Frame8, False
+    SetFrame Frame7, False
+    lblmessagebox.Caption = PesanSalah
+    StatusBar1.Panels.Item(2).Text = "Problem"
+    Timer2.Enabled = True
+    'MsgBox "Kesalahan dalam mengambil data" & vbCrLf & PesanSalah, vbExclamation, "Warning"
 End Sub
 
 Public Function Logdata(FileLok$, Pesan As String)
@@ -1979,3 +2291,51 @@ ErrorWrite:
 End Function
 
 
+Private Sub XsClient_TrackingDataBagUpdatedEvent(ByVal TrackingDataBag As XS156Client35.TrackingDataBag)
+    XsClient.StopUpdater
+    
+    If Shape1.FillColor = &H80FFFF Then
+        Shape1.FillColor = &HFF00&
+    Else
+        Shape1.FillColor = &H80FFFF
+    End If
+    lblProcessableQty.Caption = TrackingDataBag.ProcessableQuantity
+    lblOutputQty.Caption = TrackingDataBag.OutputQuantity
+    lblTarget.Caption = TrackingDataBag.TargetQuantity
+    lbl_OrderNumber.Caption = TrackingDataBag.OrderNumber
+    
+    Dim delta As Long
+    delta = (TrackingDataBag.ProcessableQuantity - TrackingDataBag.OutputQuantity)
+    Dim deltaTargetOutput As Long
+    deltaTargetOutput = TrackingDataBag.TargetQuantity - TrackingDataBag.OutputQuantity
+    If cmd_Start.Visible = False Then
+        If (delta >= 4) Then
+                Call printTrac(4)
+        End If
+        If (deltaTargetOutput = delta) And (deltaTargetOutput > 0) And (delta < 4) And LoadLabel = False Then
+                Call printTrac(deltaTargetOutput)
+        End If
+    End If
+    XsClient.StartUpdater
+
+End Sub
+
+Private Sub XsClient_TrackingReferenceNewlyLoaded(ByVal TrackingDataBag As XS156Client35.TrackingDataBag)
+    XsClient.StopUpdater
+    
+    lbl_Id.Caption = TrackingDataBag.TrackingIdentity
+    Dim sisa As Integer
+    sisa = Val(lblProcessableQty.Caption) - Val(lblOutputQty.Caption)
+    If (sisa > 0 And Not FirstLoad) And LoadLabel = False Then
+        Call printTrac(sisa)
+    End If
+    FirstLoad = False
+    '''
+    MsgBox "Reference Baru, Ganti Printer Sesuai dengan ukuran product"
+    lblmessagebox.Caption = "Reference Baru, Ganti Printer Sesuai dengan ukuran product"
+    txtRef.Text = TrackingDataBag.CurrentReferenceName
+    LoadReference (txtRef.Text)
+    XsClient.Reload
+    cmd_Start.Visible = True
+    XsClient.StartUpdater
+End Sub

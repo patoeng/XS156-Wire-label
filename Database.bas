@@ -3,11 +3,12 @@ Option Explicit
 
 Public Function BukaKoneksi() As Boolean
 Dim Kondisi As Boolean
-
+'MsgBox StringKoneksi
 On Error GoTo Salah
     If TypeName(Conn) = "Nothing" Then
         Set Conn = New ADODB.Connection
         Conn.ConnectionString = StringKoneksi
+        
         Conn.Open
     End If
     Kondisi = Conn.State
@@ -131,13 +132,14 @@ On Error GoTo Salah
             For I = 1 To 5
                 Temp = "" & DataRS.Fields("Template0" & I)
                 Lab(I) = Temp
+              
             Next I
         End If
         DataRS.Close
         Set DataRS = Nothing
     Else
         Pesan = "Database tidak aktif. Harap periksa koneksi LAN"
-'        Kondisi = MesinLog("RUN  FAIL", "IsiCombo - Koneksi ke Database Terputus")
+'       Kondisi = MesinLog("RUN  FAIL", "IsiCombo - Koneksi ke Database Terputus")
         GoTo Salah
     End If
     TutupKoneksi
@@ -253,28 +255,35 @@ End Sub
 Public Function SetingParameter() As Boolean
 On Error GoTo Salah
     If GetSetting(App.Title, "Settings", "Server") = "" Then
-        'ServerAlamat = "10.184.65.211"
+        '''ServerAlamat = "10.184.65.211"
         SaveSetting App.Title, "Settings", "Server", ServerAlamat
     Else
-        ServerAlamat = GetSetting(App.Title, "Settings", "Server")
+        ServerAlamat = "10.184.65.36"
+        '''ServerAlamat = GetSetting(App.Title, "Settings", "Server")
     End If
     If GetSetting(App.Title, "Settings", "ServerData") = "" Then
         ServerData = "XS"
         SaveSetting App.Title, "Settings", "ServerData", ServerData
+        ServerData = "dataacquitition"
     Else
         ServerData = GetSetting(App.Title, "Settings", "ServerData")
+        ServerData = "XS"
     End If
     If GetSetting(App.Title, "Settings", "ServerUser") = "" Then
-        ServerUser = "OperatorXS"
+       ServerUser = "capture"
+        'ServerUser = "root"
         SaveSetting App.Title, "Settings", "ServerUser", ServerUser
     Else
         ServerUser = GetSetting(App.Title, "Settings", "ServerUser")
+        ServerUser = "OperatorXS"
     End If
     If GetSetting(App.Title, "Settings", "ServerPass") = "" Then
         ServerPass = "Inductive"
         SaveSetting App.Title, "Settings", "ServerPass", ServerPass
     Else
+        ServerPass = "Inductive"
         ServerPass = GetSetting(App.Title, "Settings", "ServerPass")
+        ServerPass = "Inductive"
     End If
     If GetSetting(App.Title, "Settings", "ServerDriver") = "" Then
         ServerDriver = "{MySQL ODBC 5.1 Driver}"   '{MySQL ODBC 3.51 Driver}

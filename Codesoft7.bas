@@ -114,6 +114,9 @@ Public CancelBut As Boolean
 'Const DscDateiMistmatch = "Die Anzahl der Felder in der DSC-Datei stimmt nicht mit der Anzahl in der Datei überein!"
 'Const LabDateiMistmatch = "Die Anzahl der Felder im Label stimmt nicht mit der Anzahl in der Datei überein!"
 
+
+Public ActiveLablePath As String
+
 Sub Main()
 Dim Kondisi As Boolean
 
@@ -324,17 +327,21 @@ On Error GoTo Salah
     For I = 1 To 5
         If Lab(I) <> "" Then
             NamaFile = PathLabel & Lab(I) & ".lab"
-            Kondisi = OpenLab(NamaFile)
+            Kondisi = True
+            If I = 3 Then
+                Kondisi = OpenLab(NamaFile)
+                ActiveLablePath = NamaFile
+            End If
             If Not Kondisi Then
                 Pesan = "Buka Label 0" & I & " gagal"
                 GoTo Salah
             End If
-            NamaFile = PathLabel & Lab(I) & "RR.lab"
-            Kondisi = OpenLab(NamaFile)
-            If Not Kondisi Then
-                Pesan = "Buka Label 0" & I & "RR gagal"
-                GoTo Salah
-            End If
+            ''NamaFile = PathLabel & Lab(I) & "RR.lab"
+            ''Kondisi = OpenLab(NamaFile)
+            ''If Not Kondisi Then
+            ''    Pesan = "Buka Label 0" & I & "RR gagal"
+            ''    GoTo Salah
+            ''End If
             frmMain.OptType(I).Visible = True
         Else
             frmMain.OptType(I).Visible = False
@@ -462,11 +469,11 @@ On Error Resume Next
 Dim I As Integer
 Dim pos As Integer
 Dim eintrag As String
-Dim Jumlah As Integer
+Dim jumlah As Integer
     
     SetPrinters = False
-    Jumlah = CS7Server.PrinterSystem.Printers(lppxAllPrinters).Count
-    For I = 0 To Jumlah
+    jumlah = CS7Server.PrinterSystem.Printers(lppxAllPrinters).Count
+    For I = 0 To jumlah
         eintrag = CS7Server.PrinterSystem.Printers(lppxAllPrinters).Item(I)
         pos = InStr(1, eintrag, ",", vbTextCompare)
         If Trim(eintrag) = Trim(Drucker) Then
@@ -522,12 +529,12 @@ ErrorHandle:
 End Sub
 
 Public Sub PrinterList()
-Dim Jumlah, I As Integer
+Dim jumlah, I As Integer
 Dim Printer As String
 
 On Error GoTo ErrorHandle
-    Jumlah = CS7Server.PrinterSystem.Printers(lppxAllPrinters).Count
-    For I = 0 To Jumlah
+    jumlah = CS7Server.PrinterSystem.Printers(lppxAllPrinters).Count
+    For I = 0 To jumlah
         Printer = CS7Server.PrinterSystem.Printers(lppxAllPrinters).Item(I)
         frmOption.cboPrinter.AddItem Printer
     Next

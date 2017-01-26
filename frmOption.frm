@@ -568,6 +568,3 @@ Private Sub txtPath_Click(Index As Integer)
     txtPath(Index).Text = Left(CommonDialog1.FileName, InStr(1, CommonDialog1.FileName, CommonDialog1.FileTitle) - 2)
 End Sub
 
-Private Sub txtServer_Change(Index As Integer)
-
-End Sub
