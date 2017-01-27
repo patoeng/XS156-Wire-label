@@ -135,6 +135,17 @@ Private Sub OKButton_Click()
             IsVisible = Not IsVisible
             ServerVisible IsVisible
         End If
+    Case "Manual"
+        If FrmDialog.Text1.Text <> PassAdmin Then
+            MsgBox "Maaf, Anda Tidak memiliki akses untuk ini"
+            Perintah = ""
+            Unload Me
+        Else
+            
+            Perintah = ""
+            Unload Me
+            frmMain.Printing 4, True
+        End If
     End Select
 End Sub
 

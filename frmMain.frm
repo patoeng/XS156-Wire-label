@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "mscomctl.OCX"
 Begin VB.Form frmMain 
    BackColor       =   &H00C0C000&
@@ -7,7 +7,7 @@ Begin VB.Form frmMain
    Caption         =   "Packaging Software"
    ClientHeight    =   10710
    ClientLeft      =   150
-   ClientTop       =   840
+   ClientTop       =   780
    ClientWidth     =   15240
    ControlBox      =   0   'False
    FillColor       =   &H80000002&
@@ -572,7 +572,7 @@ Begin VB.Form frmMain
       Appearance      =   1
       MonthBackColor  =   8454143
       ShowWeekNumbers =   -1  'True
-      StartOfWeek     =   16449538
+      StartOfWeek     =   141557762
       TrailingForeColor=   8421504
       CurrentDate     =   38856
    End
@@ -951,12 +951,12 @@ Begin VB.Form frmMain
             Strikethrough   =   0   'False
          EndProperty
          Height          =   615
-         Left            =   9000
+         Left            =   8880
          MaskColor       =   &H80000000&
          TabIndex        =   39
          ToolTipText     =   "Untuk Mengubah Date Code"
          Top             =   2520
-         Width           =   1095
+         Width           =   1575
       End
       Begin VB.CommandButton CommandCancel 
          Caption         =   "Cancel"
@@ -970,17 +970,17 @@ Begin VB.Form frmMain
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   9000
+         Left            =   8880
          MaskColor       =   &H80000000&
          TabIndex        =   37
          ToolTipText     =   "Untuk Batalin"
          Top             =   1800
          Visible         =   0   'False
-         Width           =   1095
+         Width           =   1575
       End
       Begin VB.CommandButton CommandOK 
          BackColor       =   &H00C0FFC0&
-         Caption         =   "Print"
+         Caption         =   "Manual Print"
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   12
@@ -991,13 +991,13 @@ Begin VB.Form frmMain
             Strikethrough   =   0   'False
          EndProperty
          Height          =   495
-         Left            =   9000
+         Left            =   8880
          MaskColor       =   &H80000000&
          Style           =   1  'Graphical
          TabIndex        =   36
          ToolTipText     =   "Untuk Ngeprint"
          Top             =   960
-         Width           =   1095
+         Width           =   1575
       End
       Begin VB.TextBox Textdate 
          Alignment       =   2  'Center
@@ -1023,6 +1023,7 @@ Begin VB.Form frmMain
       Begin VB.TextBox TextQty 
          Alignment       =   2  'Center
          BackColor       =   &H008080FF&
+         Enabled         =   0   'False
          BeginProperty Font 
             Name            =   "Arial"
             Size            =   26.25
@@ -1354,6 +1355,10 @@ Salah:
     
 End Sub
 
+Private Sub cmd_Start_Click()
+cmd_Start.Visible = False
+End Sub
+
 Private Sub Command1_Click()
  Dim s As String
  s = XsClient.ConnectionTest
@@ -1511,7 +1516,7 @@ Private Sub Form_Terminate()
     cmdExit_Click
 End Sub
 
-Private Sub Printing(ByVal jumlah As Integer)
+Public Sub Printing(ByVal jumlah As Integer, ByVal Manual As Boolean)
 Dim HasilPrint
 Dim response As String
 Dim Lokasi$, Pesan$
@@ -1521,7 +1526,9 @@ On Error GoTo ErrorHandle
         response = "Error!! No open document"
         GoTo ErrorHandle
     End If
-    XsClient.UpdateOutputQuantity (jumlah)
+    If Manual = False Then
+        XsClient.UpdateOutputQuantity (jumlah)
+    End If
     
     frmMain.lblmessagebox.Caption = "Printing sedang dilakukan..."
     Lokasi$ = App.Path & "\DataLok\" & Format(Date, "yyww", vbSunday, vbFirstFullWeek) & ".log"
@@ -1781,24 +1788,13 @@ End Sub
 Private Sub CommandOK_Click()
 'If Textdate <> "" Then
 On Error GoTo Salah
-    If (Val(TextQty.Text) <= 0 Or Val(TextQty.Text) > 32767) Then
-        MsgBox "Jumlah label tidak valid"
-        TextQty.Text = ""
-        TextQty.SetFocus
-    Else
-        Qty_printed = Val(TextQty.Text)
-        CancelBut = False
-        'Unload Me
-        frmMain.SetFocus
-        Call Printing(Int(TextQty.Text))
+    FrmDialog.Perintah = "Manual"
+    FrmDialog.Show vbModal
+
     
         MonthView1_DateClick Now
         
-    End If
-    If Check3.Value = 1 Then
-        txtRef.SetFocus
-    End If
-    
+   
     Exit Sub
     
 Salah:
@@ -1818,7 +1814,7 @@ On Error GoTo Salah
         CancelBut = False
         'Unload Me
         frmMain.SetFocus
-        Call Printing(jumlah)
+        Call Printing(jumlah, False)
     
         MonthView1_DateClick Now
         
@@ -2084,6 +2080,7 @@ Salah:
 '    MsgBox "Problem: (Pilih Model tak jalan) hubungi test enginner.", vbExclamation
 
 End Sub
+
 Private Sub txtRef_KeyPress(KeyAscii As Integer)
 Dim Kondisi As Boolean
 Dim I As Integer
@@ -2301,6 +2298,7 @@ Private Sub XsClient_TrackingDataBagUpdatedEvent(ByVal TrackingDataBag As XS156C
     End If
     lblProcessableQty.Caption = TrackingDataBag.ProcessableQuantity
     lblOutputQty.Caption = TrackingDataBag.OutputQuantity
+    TextQty.Text = TrackingDataBag.OutputQuantity
     lblTarget.Caption = TrackingDataBag.TargetQuantity
     lbl_OrderNumber.Caption = TrackingDataBag.OrderNumber
     
@@ -2331,11 +2329,13 @@ Private Sub XsClient_TrackingReferenceNewlyLoaded(ByVal TrackingDataBag As XS156
     End If
     FirstLoad = False
     '''
-    MsgBox "Reference Baru, Ganti Printer Sesuai dengan ukuran product"
-    lblmessagebox.Caption = "Reference Baru, Ganti Printer Sesuai dengan ukuran product"
     txtRef.Text = TrackingDataBag.CurrentReferenceName
     LoadReference (txtRef.Text)
     XsClient.Reload
     cmd_Start.Visible = True
+    
     XsClient.StartUpdater
+    MsgBox "Reference Baru, Ganti Printer Sesuai dengan ukuran product "
+    lblmessagebox.Caption = "Reference Baru, Ganti Printer Sesuai dengan ukuran product"
+    
 End Sub
