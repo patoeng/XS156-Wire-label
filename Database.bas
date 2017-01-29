@@ -255,35 +255,29 @@ End Sub
 Public Function SetingParameter() As Boolean
 On Error GoTo Salah
     If GetSetting(App.Title, "Settings", "Server") = "" Then
-        '''ServerAlamat = "10.184.65.211"
+        ServerAlamat = "10.184.65.36"
         SaveSetting App.Title, "Settings", "Server", ServerAlamat
     Else
-        ServerAlamat = "10.184.65.36"
-        '''ServerAlamat = GetSetting(App.Title, "Settings", "Server")
+        ServerAlamat = GetSetting(App.Title, "Settings", "Server")
     End If
     If GetSetting(App.Title, "Settings", "ServerData") = "" Then
         ServerData = "XS"
         SaveSetting App.Title, "Settings", "ServerData", ServerData
-        ServerData = "dataacquitition"
     Else
         ServerData = GetSetting(App.Title, "Settings", "ServerData")
-        ServerData = "XS"
     End If
+    
     If GetSetting(App.Title, "Settings", "ServerUser") = "" Then
-       ServerUser = "capture"
-        'ServerUser = "root"
+        ServerUser = "OperatorXS"
         SaveSetting App.Title, "Settings", "ServerUser", ServerUser
     Else
         ServerUser = GetSetting(App.Title, "Settings", "ServerUser")
-        ServerUser = "OperatorXS"
     End If
     If GetSetting(App.Title, "Settings", "ServerPass") = "" Then
         ServerPass = "Inductive"
         SaveSetting App.Title, "Settings", "ServerPass", ServerPass
     Else
-        ServerPass = "Inductive"
         ServerPass = GetSetting(App.Title, "Settings", "ServerPass")
-        ServerPass = "Inductive"
     End If
     If GetSetting(App.Title, "Settings", "ServerDriver") = "" Then
         ServerDriver = "{MySQL ODBC 5.1 Driver}"   '{MySQL ODBC 3.51 Driver}

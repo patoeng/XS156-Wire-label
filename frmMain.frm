@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "mscomctl.OCX"
 Begin VB.Form frmMain 
    BackColor       =   &H00C0C000&
@@ -7,7 +7,7 @@ Begin VB.Form frmMain
    Caption         =   "Packaging Software"
    ClientHeight    =   10710
    ClientLeft      =   150
-   ClientTop       =   780
+   ClientTop       =   840
    ClientWidth     =   15240
    ControlBox      =   0   'False
    FillColor       =   &H80000002&
@@ -22,9 +22,11 @@ Begin VB.Form frmMain
    StartUpPosition =   3  'Windows Default
    Visible         =   0   'False
    Begin VB.CommandButton cmd_Start 
+      BackColor       =   &H0000FF00&
       Caption         =   "LANJUTKAN"
       Height          =   495
       Left            =   1680
+      MaskColor       =   &H0000FF00&
       TabIndex        =   81
       Top             =   1560
       Visible         =   0   'False
@@ -142,31 +144,39 @@ Begin VB.Form frmMain
          Strikethrough   =   0   'False
       EndProperty
       Height          =   1455
-      Left            =   8160
+      Left            =   7920
       TabIndex        =   55
       Top             =   2040
-      Width           =   3615
+      Width           =   4095
+      Begin VB.CommandButton cmd_Save 
+         Caption         =   "SAVE"
+         Height          =   855
+         Left            =   3120
+         TabIndex        =   82
+         Top             =   480
+         Width           =   855
+      End
       Begin VB.TextBox TxtKiri 
          BackColor       =   &H00C0FFFF&
          Height          =   375
-         Left            =   2400
+         Left            =   2160
          MaxLength       =   5
          TabIndex        =   59
          Text            =   "Text4"
          ToolTipText     =   "Buat Geser Kiri Kanan"
          Top             =   960
-         Width           =   1095
+         Width           =   855
       End
       Begin VB.TextBox TxtAtas 
          BackColor       =   &H00C0FFFF&
          Height          =   375
-         Left            =   2400
+         Left            =   2160
          MaxLength       =   5
          TabIndex        =   58
          Text            =   "Text3"
          ToolTipText     =   "Buat Geser Atas Bawah"
-         Top             =   600
-         Width           =   1095
+         Top             =   480
+         Width           =   855
       End
       Begin VB.OptionButton OptPosisi 
          BackColor       =   &H0000FFFF&
@@ -187,7 +197,7 @@ Begin VB.Form frmMain
          TabIndex        =   57
          ToolTipText     =   "Posisi Keluar Terbalik"
          Top             =   960
-         Width           =   1575
+         Width           =   1215
       End
       Begin VB.OptionButton OptPosisi 
          BackColor       =   &H0000FFFF&
@@ -209,7 +219,7 @@ Begin VB.Form frmMain
          ToolTipText     =   "Posisi keluar Normal"
          Top             =   600
          Value           =   -1  'True
-         Width           =   1575
+         Width           =   1215
       End
       Begin VB.Label Label7 
          BackColor       =   &H00C0C000&
@@ -224,7 +234,7 @@ Begin VB.Form frmMain
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   1800
+         Left            =   1560
          TabIndex        =   61
          Top             =   960
          Width           =   495
@@ -242,7 +252,7 @@ Begin VB.Form frmMain
             Strikethrough   =   0   'False
          EndProperty
          Height          =   255
-         Left            =   1800
+         Left            =   1560
          TabIndex        =   60
          Top             =   600
          Width           =   495
@@ -572,7 +582,7 @@ Begin VB.Form frmMain
       Appearance      =   1
       MonthBackColor  =   8454143
       ShowWeekNumbers =   -1  'True
-      StartOfWeek     =   141557762
+      StartOfWeek     =   65601538
       TrailingForeColor=   8421504
       CurrentDate     =   38856
    End
@@ -1300,15 +1310,18 @@ Dim FirstLoad As Boolean
 Public WithEvents XsClient As Xs156Client
 Attribute XsClient.VB_VarHelpID = -1
 Dim LoadLabel As Boolean
-
+Dim sActiveReferenceDiameter As String
+Public sPrinterName As String
+Public xOffset As Long
+Public yOffset As Long
 
 Private Sub cboFamily_click()
 Dim Kondisi As Boolean
 
     PesanSalah = ""
     frmMain.lblmessagebox.Caption = "Tunggu sedang ambil data Familynya...."
-    OptPosisi(1).Value = True
-    OptType(1).Value = True
+    OptPosisi(1).value = True
+    OptType(1).value = True
     Picture1.Visible = False
     SetFrame Frame1, False
     SetFrame Frame6, False
@@ -1335,7 +1348,7 @@ Dim Kondisi As Boolean
             SetFrame Frame8, True
             Check3.Visible = True
             Check3.Enabled = True
-            Check3.Value = 0
+            Check3.value = 0
             Call OptType_Click(1)
             Call OptPosisi_Click(1)
         End If
@@ -1353,6 +1366,11 @@ Salah:
     StatusBar1.Panels.Item(2).Text = "Problem"
     Timer2.Enabled = True
     
+End Sub
+
+Private Sub cmd_Save_Click()
+IniFile.SaveXOffset sActiveReferenceDiameter, TxtAtas.Text
+IniFile.SaveYOffset sActiveReferenceDiameter, TxtKiri.Text
 End Sub
 
 Private Sub cmd_Start_Click()
@@ -1494,7 +1512,7 @@ On Error Resume Next
     txtModel.Text = ""
     lblmessagebox.Caption = "Silahkan Pilih Modelnya"
     lblmessagebox.BackColor = &HC0C000
-    OptType(1).Value = True
+    OptType(1).value = True
     If IsVisible Then frmOption.btnHide.Caption = "Hide" Else frmOption.btnHide.Caption = "unHide"
     scan = 1
     If Loading Then
@@ -1549,7 +1567,7 @@ DocCheckError: Err.Clear
     Qty_printed = jumlah
 '    HasilPrint = Doc.PrintLabel(Qty_printed, 1)
 
-    Doc.Printer.SwitchTo ("ZDesigner 110Xi4 600 dpi")
+    Doc.Printer.SwitchTo (sPrinterName)
     HasilPrint = Doc.PrintDocument(Qty_printed)
     
     If HasilPrint = 1 Then HasilPrint = True Else HasilPrint = False
@@ -1603,8 +1621,8 @@ On Error GoTo Salah
 '    Set CSVar = Doc.Variables.FormVariables("DateCode")
 '    CSVar.Value = Textdate.Text
     
-    Doc.Variables.FormVariables("Model").Value = ModelPilih
-    Doc.Variables.FormVariables("DateCode").Value = Textdate.Text
+    Doc.Variables.FormVariables("Model").value = ModelPilih
+    Doc.Variables.FormVariables("DateCode").value = Textdate.Text
     Set CSVar = Nothing
     If AmbilGambar Then
         SetFrame Frame1, True
@@ -1648,7 +1666,7 @@ Salah:
 End Function
 
 Private Sub Check3_Click()
-    If Check3.Value = 1 Then
+    If Check3.value = 1 Then
         cboModel.Visible = False
         txtRef.Visible = True
         If Not Loading Then
@@ -1819,7 +1837,7 @@ On Error GoTo Salah
         MonthView1_DateClick Now
         
     End If
-    If Check3.Value = 1 Then
+    If Check3.value = 1 Then
         ''txtRef.SetFocus
     End If
     
@@ -1895,15 +1913,15 @@ Dim NamaFile As String
 '    Else
 '        MsgBox Parameter180
 '    End If
-    If OptType(1).Value Then
+    If OptType(1).value Then
         Nilai = 1
-    ElseIf OptType(2).Value Then
+    ElseIf OptType(2).value Then
         Nilai = 2
-    ElseIf OptType(3).Value Then
+    ElseIf OptType(3).value Then
         Nilai = 3
-    ElseIf OptType(4).Value Then
+    ElseIf OptType(4).value Then
         Nilai = 4
-    ElseIf OptType(5).Value Then
+    ElseIf OptType(5).value Then
         Nilai = 5
     Else
         Nilai = 0
@@ -1919,7 +1937,7 @@ Dim NamaFile As String
         CS7Server.Documents(NamaFile).Activate
         Set Doc = CS7Server.ActiveDocument
     End If
-    If Check3.Value = 0 Then
+    If Check3.value = 0 Then
         Nilai = cboModel.ListIndex
     Else
         Nilai = -1
@@ -1933,7 +1951,7 @@ Dim NamaFile As String
             Exit Sub
         End If
     End If
-    If Check3.Value = 1 Then
+    If Check3.value = 1 Then
         If Not Loading Then
             txtRef.SetFocus
         End If
@@ -1948,9 +1966,9 @@ Dim Kondisi As Boolean
 
 On Error GoTo Salah
     PesanSalah = ""
-    If OptPosisi(1).Value Then
+    If OptPosisi(1).value Then
         Nilai = 1
-    ElseIf OptPosisi(2).Value Then
+    ElseIf OptPosisi(2).value Then
         Nilai = 2
     Else
         Nilai = 0
@@ -1967,7 +1985,7 @@ On Error GoTo Salah
         Set Doc = CS7Server.ActiveDocument
     End If
     'Nilai = cboModel.ListIndex
-    If Check3.Value = 0 Then
+    If Check3.value = 0 Then
         Nilai = cboModel.ListIndex
     Else
         Nilai = -1
@@ -1979,7 +1997,7 @@ On Error GoTo Salah
             PesanSalah = "Problem dalam penyegaran...."
         End If
     End If
-    If Check3.Value = 1 Then
+    If Check3.value = 1 Then
         If Not Loading Then
             txtRef.SetFocus
         End If
@@ -2139,7 +2157,7 @@ On Error GoTo Salah
             SetFrame Frame7, True
             'OptType(3).Visible = True
             'OptType_Click (3)
-            OptType(3).Value = True
+            OptType(3).value = True
 'End v5.0.5 ----------------------------------------------------------------------------------------------
             'KodeRef = Left(ModelPilih, 2)
             'If KodeRef = "XU" Then
@@ -2183,6 +2201,16 @@ On Error GoTo Salah
             ModelPilih = Trim(Left(ModelPilih, 15))
         End If
         TxtDisplayRef = ModelPilih
+        
+        '''Anom: get diameter
+            sActiveReferenceDiameter = GetDiameterFromReference(ModelPilih)
+            sPrinterName = IniFile.GetPrinter(sActiveReferenceDiameter)
+            xOffset = IniFile.GetXOffset(sActiveReferenceDiameter)
+            yOffset = IniFile.GetYOffset(sActiveReferenceDiameter)
+            
+            TxtAtas.Text = xOffset
+            TxtKiri.Text = yOffset
+        '''
 'Begin v5.0.5 ----------------------------------------------------------------------------------------------
 ' Oleh  : Yohanes Khan
 ' Tgl   : 20130923
@@ -2227,7 +2255,7 @@ On Error GoTo Salah
             SetFrame Frame7, True
             'OptType(3).Visible = True
             'OptType_Click (3)
-            OptType(3).Value = True
+            OptType(3).value = True
 'End v5.0.5 ----------------------------------------------------------------------------------------------
             'KodeRef = Left(ModelPilih, 2)
             'If KodeRef = "XU" Then
@@ -2339,3 +2367,42 @@ Private Sub XsClient_TrackingReferenceNewlyLoaded(ByVal TrackingDataBag As XS156
     lblmessagebox.Caption = "Reference Baru, Ganti Printer Sesuai dengan ukuran product"
     
 End Sub
+Private Function GetDiameterFromReference(ByVal stringReference As String) As String
+Dim stringVal As String
+Dim XSposition As Long
+Dim DiameterPos As Long
+Dim stringResult As String
+
+stringVal = UCase(stringReference)
+
+XSposition = InStr(stringVal, "XS")
+If XSposition <> 1 Then
+   GetDiameterFromReference = ""
+   Return
+End If
+
+DiameterPos = InStr(stringVal, "08")
+If DiameterPos > 2 And DiameterPos < 6 Then
+   GetDiameterFromReference = "D08"
+   Exit Function
+End If
+DiameterPos = InStr(stringVal, "12")
+If DiameterPos > 2 And DiameterPos < 6 Then
+   GetDiameterFromReference = "D12"
+   Exit Function
+End If
+DiameterPos = InStr(stringVal, "18")
+If DiameterPos > 2 And DiameterPos < 6 Then
+   GetDiameterFromReference = "D18"
+   Exit Function
+End If
+DiameterPos = InStr(stringVal, "30")
+If DiameterPos > 2 And DiameterPos < 6 Then
+   GetDiameterFromReference = "D30"
+   Exit Function
+End If
+
+GetDiameterFromReference = ""
+Exit Function
+
+End Function

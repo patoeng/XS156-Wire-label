@@ -117,7 +117,7 @@ Public CancelBut As Boolean
 
 Public ActiveLablePath As String
 
-Sub Main()
+Sub main()
 Dim Kondisi As Boolean
 
 On Error GoTo Salah
@@ -184,7 +184,7 @@ On Error GoTo Salah
     If ProsesSts(0) Then
         Unload frmSplash
         frmMain.Show
-        If frmMain.Check3.Value = 0 Then
+        If frmMain.Check3.value = 0 Then
             frmMain.txtRef.SetFocus
         End If
     Else
@@ -555,7 +555,7 @@ Dim A As Variant
     Set CSText = Doc.DocObjects.Add(lppxObjectText, "Teks01")
 '    CSText = Doc.DocObjects.Texts.Item("Teks01")
     SetFont CSText, "Kartika", True, 10, True
-    CSText.Value = "Percobaan"
+    CSText.value = "Percobaan"
     CSText.AnchorPoint = lppxTopLeft
     CSText.SelText.Select
     CSText.Left = 20 * 100
