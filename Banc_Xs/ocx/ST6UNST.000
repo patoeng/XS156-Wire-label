@@ -1,0 +1,58 @@
+ %% NE PAS MODIFIER NI SUPPRIMER CE FICHIER! %% 
+ %% Ce fichier contient des informations relatives à l'installation d'une application. %% 
+ %% Il est utilisé pour supprimer automatiquement de votre ordinateur tous les composants de l'application, si vous le souhaitez. %% 
+
+
+NOTE: Début de la section du programme d'amorçage
+
+CONFIG: Title: "OCX fenêtre d'affichage defaut banc XS"
+
+ACTION: RegKey: "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion", "SharedDLLs"
+
+ACTION: SystemFile: "C:\WINDOWS\SYSTEM\VB6STKIT.DLL"
+(Le fichier présent sur le disque était déjà à jour.)
+
+ACTION: SystemFile: "C:\WINDOWS\SYSTEM\VB6FR.DLL"
+(Le fichier présent sur le disque était déjà à jour.)
+
+ACTION: SystemFile: "C:\WINDOWS\SYSTEM\COMCAT.DLL"
+(Le fichier présent sur le disque était déjà à jour.)
+
+ACTION: SystemFile: "C:\WINDOWS\SYSTEM\STDOLE2.TLB"
+(Le fichier présent sur le disque était déjà à jour.)
+
+ACTION: SystemFile: "C:\WINDOWS\SYSTEM\ASYCFILT.DLL"
+(Le fichier présent sur le disque était déjà à jour.)
+
+ACTION: SystemFile: "C:\WINDOWS\SYSTEM\OLEPRO32.DLL"
+(Le fichier présent sur le disque était déjà à jour.)
+
+ACTION: SystemFile: "C:\WINDOWS\SYSTEM\OLEAUT32.DLL"
+(Le fichier présent sur le disque était déjà à jour.)
+
+ACTION: SystemFile: "C:\WINDOWS\SYSTEM\msvbvm60.dll"
+(Le fichier présent sur le disque était déjà à jour.)
+
+ACTION: DllSelfRegister: "C:\WINDOWS\SYSTEM\COMCAT.DLL"
+
+ACTION: TLBRegister: "C:\WINDOWS\SYSTEM\STDOLE2.TLB"
+
+ACTION: DllSelfRegister: "C:\WINDOWS\SYSTEM\OLEPRO32.DLL"
+
+ACTION: DllSelfRegister: "C:\WINDOWS\SYSTEM\OLEAUT32.DLL"
+
+ACTION: DllSelfRegister: "C:\WINDOWS\SYSTEM\msvbvm60.dll"
+
+NOTE: Fin de la section du programme d'amorçage
+
+NOTE: Exécution dynamique du programme d'installation principal 'Setup1.exe'....
+
+ACTION: SharedFile: "C:\banc_xs\ocx\Affiche_defaut.dll"
+(Fichier introuvable ou périmé -- nouveau fichier copié)
+
+ACTION: DllSelfRegister: "C:\banc_xs\ocx\Affiche_defaut.dll"
+
+ACTION: RegKey: "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion", "App Paths\Affiche_defaut.dll"
+
+ACTION: RegValue: "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\App Paths\Affiche_defaut.dll", ""
+
