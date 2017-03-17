@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "mscomct2.ocx"
+Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
 Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "mscomctl.OCX"
 Begin VB.Form frmMain 
    BackColor       =   &H00C0C000&
@@ -7,7 +7,7 @@ Begin VB.Form frmMain
    Caption         =   "Packaging Software"
    ClientHeight    =   10710
    ClientLeft      =   150
-   ClientTop       =   840
+   ClientTop       =   780
    ClientWidth     =   15240
    ControlBox      =   0   'False
    FillColor       =   &H80000002&
@@ -582,7 +582,7 @@ Begin VB.Form frmMain
       Appearance      =   1
       MonthBackColor  =   8454143
       ShowWeekNumbers =   -1  'True
-      StartOfWeek     =   65601538
+      StartOfWeek     =   122617858
       TrailingForeColor=   8421504
       CurrentDate     =   38856
    End
@@ -2202,14 +2202,7 @@ On Error GoTo Salah
         End If
         TxtDisplayRef = ModelPilih
         
-        '''Anom: get diameter
-            sActiveReferenceDiameter = GetDiameterFromReference(ModelPilih)
-            sPrinterName = IniFile.GetPrinter(sActiveReferenceDiameter)
-            xOffset = IniFile.GetXOffset(sActiveReferenceDiameter)
-            yOffset = IniFile.GetYOffset(sActiveReferenceDiameter)
-            
-            TxtAtas.Text = xOffset
-            TxtKiri.Text = yOffset
+        '
         '''
 'Begin v5.0.5 ----------------------------------------------------------------------------------------------
 ' Oleh  : Yohanes Khan
@@ -2277,6 +2270,14 @@ On Error GoTo Salah
         
         timerLabLoad.Enabled = True
         
+        ''Anom: get diameter
+            sActiveReferenceDiameter = GetDiameterFromReference(labelFileName)
+            sPrinterName = IniFile.GetPrinter(sActiveReferenceDiameter)
+            xOffset = IniFile.GetXOffset(sActiveReferenceDiameter)
+            yOffset = IniFile.GetYOffset(sActiveReferenceDiameter)
+            
+            TxtAtas.Text = xOffset
+            TxtKiri.Text = yOffset
     ''End If
     Exit Sub
 Salah:

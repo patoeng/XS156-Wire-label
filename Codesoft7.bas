@@ -7,6 +7,7 @@ Attribute VB_Name = "Codesoft7"
 '*****************************************************
 Option Explicit
 'Option Base 1
+Public labelFileName As String
 
 ' Variabel untuk Parameter software
 Public ServerAlamat As String
@@ -117,7 +118,7 @@ Public CancelBut As Boolean
 
 Public ActiveLablePath As String
 
-Sub main()
+Sub Main()
 Dim Kondisi As Boolean
 
 On Error GoTo Salah
@@ -331,6 +332,7 @@ On Error GoTo Salah
             If I = 3 Then
                 Kondisi = OpenLab(NamaFile)
                 ActiveLablePath = NamaFile
+                labelFileName = Lab(I)
             End If
             If Not Kondisi Then
                 Pesan = "Buka Label 0" & I & " gagal"
@@ -563,6 +565,7 @@ Dim A As Variant
     IsiText CSText, " Udah berhasil ", 0
 '    CSText.InsertString "Udah Berhasil ", 1, CSText.Font
     SetFont CSText, "Arial", True, 20, False
+    
 '    DoEvent
 '    a = CSText.Font
     Delay (0.1)
