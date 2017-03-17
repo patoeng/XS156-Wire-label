@@ -1,13 +1,13 @@
 VERSION 5.00
 Object = "{86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCT2.OCX"
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "mscomctl.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.1#0"; "MSCOMCTL.OCX"
 Begin VB.Form frmMain 
    BackColor       =   &H00C0C000&
    BorderStyle     =   1  'Fixed Single
    Caption         =   "Packaging Software"
    ClientHeight    =   10710
    ClientLeft      =   150
-   ClientTop       =   780
+   ClientTop       =   840
    ClientWidth     =   15240
    ControlBox      =   0   'False
    FillColor       =   &H80000002&
@@ -582,7 +582,7 @@ Begin VB.Form frmMain
       Appearance      =   1
       MonthBackColor  =   8454143
       ShowWeekNumbers =   -1  'True
-      StartOfWeek     =   122617858
+      StartOfWeek     =   16515074
       TrailingForeColor=   8421504
       CurrentDate     =   38856
    End
@@ -1374,7 +1374,12 @@ IniFile.SaveYOffset sActiveReferenceDiameter, TxtKiri.Text
 End Sub
 
 Private Sub cmd_Start_Click()
-cmd_Start.Visible = False
+Dim Aa As String
+Aa = MsgBox("Apakah label sudah dipatikan Ok?", vbYesNo, "Persiapan Printer")
+
+If Aa = vbYes Then
+    cmd_Start.Visible = False
+End If
 End Sub
 
 Private Sub Command1_Click()
