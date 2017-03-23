@@ -21,6 +21,14 @@ Begin VB.Form frmMain
    ScaleWidth      =   15240
    StartUpPosition =   3  'Windows Default
    Visible         =   0   'False
+   Begin VB.CommandButton cmd_Force 
+      Caption         =   "FORCE PRINT"
+      Height          =   495
+      Left            =   120
+      TabIndex        =   83
+      Top             =   1560
+      Width           =   1575
+   End
    Begin VB.CommandButton cmd_Start 
       BackColor       =   &H0000FF00&
       Caption         =   "LANJUTKAN"
@@ -582,7 +590,7 @@ Begin VB.Form frmMain
       Appearance      =   1
       MonthBackColor  =   8454143
       ShowWeekNumbers =   -1  'True
-      StartOfWeek     =   16515074
+      StartOfWeek     =   16384002
       TrailingForeColor=   8421504
       CurrentDate     =   38856
    End
@@ -1368,6 +1376,18 @@ Salah:
     
 End Sub
 
+Private Sub cmd_Force_Click()
+ Dim DeltaQty As Integer
+  If cmd_Start.Visible = False Then
+    If Val(lblProcessableQty.Caption) > 0 Then
+        DeltaQty = Val(lblProcessableQty.Caption) - Val(lblOutputQty.Caption)
+        If DeltaQty > 0 Then
+           printTrac DeltaQty
+        End If
+    End If
+  End If
+End Sub
+
 Private Sub cmd_Save_Click()
 IniFile.SaveXOffset sActiveReferenceDiameter, TxtAtas.Text
 IniFile.SaveYOffset sActiveReferenceDiameter, TxtKiri.Text
@@ -1379,6 +1399,7 @@ Aa = MsgBox("Apakah label sudah dipatikan Ok?", vbYesNo, "Persiapan Printer")
 
 If Aa = vbYes Then
     cmd_Start.Visible = False
+    cmd_Force.Visible = True
 End If
 End Sub
 
@@ -2367,6 +2388,7 @@ Private Sub XsClient_TrackingReferenceNewlyLoaded(ByVal TrackingDataBag As XS156
     LoadReference (txtRef.Text)
     XsClient.Reload
     cmd_Start.Visible = True
+    cmd_Force.Visible = False
     
     XsClient.StartUpdater
     MsgBox "Reference Baru, Ganti Printer Sesuai dengan ukuran product "
