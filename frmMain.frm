@@ -590,7 +590,7 @@ Begin VB.Form frmMain
       Appearance      =   1
       MonthBackColor  =   8454143
       ShowWeekNumbers =   -1  'True
-      StartOfWeek     =   16384002
+      StartOfWeek     =   16515074
       TrailingForeColor=   8421504
       CurrentDate     =   38856
    End
@@ -1395,7 +1395,7 @@ End Sub
 
 Private Sub cmd_Start_Click()
 Dim Aa As String
-Aa = MsgBox("Apakah label sudah dipatikan Ok?", vbYesNo, "Persiapan Printer")
+Aa = MsgBox("Apakah label sudah Ok?", vbYesNo, "Persiapan Printer")
 
 If Aa = vbYes Then
     cmd_Start.Visible = False
